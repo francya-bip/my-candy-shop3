@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="file2.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfecto</title>
+</head>
+<body>
+    <!-- Навигационное меню (якоря) -->
+<nav class="main-nav">
+    <div class="nav-container">
+        <a href="#home" class="nav-logo">Perfecto</a>
+        <ul class="nav-menu">
+            <li><a href="#catalog" class="nav-link">Каталог</a></li>
+            <li><a href="#reviews" class="nav-link">Отзывы</a></li>
+            <li><a href="#contacts" class="nav-link">Контакты</a></li>
+            <li><a href="#blog" class="nav-link">Блог</a></li>   
+        </ul>
+    </div>
+</nav>
+
+<!-- Блок акции -->
+<div class="promo-banner" id="promo">
+    <div class="promo-content">
+        <span class="promo-text">🎉 Скидка 20% на все капкейки!</span>
+        <span class="promo-timer" id="timer">-- дн -- ч -- мин -- сек</span>
+    </div>
+</div>
+
+    <div>
+        <h1>Кондитерская Perfecto</h1>
+        <div class="cart-icon">
+            🛒 Корзина (<span id="cart-count">0</span>)
+        </div>
+
+        <!-- Модальное окно корзины -->
+        <div id="cart-modal" class="cart-modal">
+            <div class="cart-modal-content">
+                <span class="close">&times;</span>
+                <h2>Ваш заказ</h2>
+                <div id="cart-items"></div>
+                <div class="cart-total">Итого: <span id="cart-total">0</span> ₽</div>
+                <button id="checkout-btn">Оформить заказ</button>
+            </div>
+        </div>
+
+        <!-- Кнопки фильтра -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Все</button>
+            <button class="filter-btn" data-filter="cake">Торты</button>
+            <button class="filter-btn" data-filter="macaron">Пирожные</button>
+            <button class="filter-btn" data-filter="cupcake">Печенье</button>
+        </div>
+
+        <!-- Блок преимуществ -->
+<div class="features-section">
+    <h2 class="section-title">Почему выбирают нас?</h2>
+    <div class="features-container">
+        <div class="feature-card">
+            <div class="feature-icon">🎂</div>
+            <h3 class="feature-title">Натуральные ингредиенты</h3>
+            <p class="feature-desc">Используем только фермерские продукты: масло, яйца, сливки и никаких заменителей.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">👩‍🍳</div>
+            <h3 class="feature-title">Авторские рецепты</h3>
+            <p class="feature-desc">Каждое изделие — уникальный рецепт, разработанный нашими шеф-кондитерами специально для вас.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🚚</div>
+            <h3 class="feature-title">Бесплатная доставка</h3>
+            <p class="feature-desc">При заказе от 1500 ₽ доставим десерты по городу совершенно бесплатно.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">✨</div>
+            <h3 class="feature-title">Свежая выпечка</h3>
+            <p class="feature-desc">Готовим только под заказ, поэтому ваши десерты всегда будут свежайшими.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Конструктор торта -->
+<div class="constructor-section">
+    <h2 class="section-title">Собери свой торт</h2>
+    <div class="constructor-container">
+        <div class="constructor-options">
+            <div class="constructor-group">
+                <label>Корж:</label>
+                <select id="crust">
+                    <option value="500">Бисквитный (+500 ₽)</option>
+                    <option value="600">Шоколадный (+600 ₽)</option>
+                    <option value="700">Медовик (+700 ₽)</option>
+                </select>
+            </div>
+            <div class="constructor-group">
+                <label>Начинка:</label>
+                <select id="filling">
+                    <option value="300">Клубника (+300 ₽)</option>
+                    <option value="400">Карамель (+400 ₽)</option>
+                    <option value="500">Сникерс (+500 ₽)</option>
+                </select>
+            </div>
+            <div class="constructor-group">
+                <label>Размер (кг):</label>
+                <select id="size">
+                    <option value="1">1 кг (+1000 ₽)</option>
+                    <option value="2">2 кг (+1800 ₽)</option>
+                    <option value="3">3 кг (+2500 ₽)</option>
+                </select>
+            </div>
+            <div class="constructor-group">
+                <label>Декор:</label>
+                <select id="decor">
+                    <option value="200">Ягоды (+200 ₽)</option>
+                    <option value="300">Сахарные цветы (+300 ₽)</option>
+                    <option value="0">Без декора (0 ₽)</option>
+                </select>
+            </div>
+            <div class="constructor-price">
+                Итоговая цена: <span id="constructor-total">0</span> ₽
+            </div>
+            <button id="add-constructor-to-cart" class="product-btn">Добавить в корзину</button>
+        </div>
+        <div class="constructor-preview">
+            <img src="cake2-Photoroom.png" alt="Пример торта" class="constructor-img">
+        </div>
+    </div>
+</div>
+
+
+
+        <!-- Контейнер карточек (исправлен класс) -->
+        <div id="catalog" class="products-container">
+            <!-- Торт "Нежность" - Хит -->
+            <div class="product-card hit" data-category="cake">
+                <div class="hit-badge">🔥 Хит</div>
+                <img src="cake1-Photoroom.png" alt="Торт 'Нежность'" class="product-image">
+                <h3 class="product-title">Торт «Нежность»</h3>
+                <p class="product-description">Бисквитный торт с клубникой и сливочным кремом</p>
+                <span class="product-price">1 200 ₽</span>
+                <button class="product-btn">Заказать</button>
+            </div>
+
+            <!-- Макаруны -->
+            <div class="product-card" data-category="macaron">
+                <img src="cake2-Photoroom (1).png" alt="Макаронсы" class="product-image">
+                <h3 class="product-title">Макаруны</h3>
+                <p class="product-description">Набор из 6 штук: шоколад, ваниль, малина</p>
+                <span class="product-price">800 ₽</span>
+                <button class="product-btn">Заказать</button>
+            </div>
+
+            <!-- Капкейки -->
+            <div class="product-card" data-category="cupcake">
+                <img src="cake3-Photoroom (1).png" alt="Капкейки" class="product-image">
+                <h3 class="product-title">Капкейки</h3>
+                <p class="product-description">Ванильный бисквит с сырным кремом</p>
+                <span class="product-price">500 ₽</span>
+                <button class="product-btn">Заказать</button>
+            </div>
+
+            <!-- Торт "Наполеон" -->
+            <div class="product-card" data-category="cake">
+                <img src="e665212efa0e5e88dbf78b203fd6f364-Photoroom.png" alt="Торт 'Наполеон'" class="product-image">
+                <h3 class="product-title">Торт «Наполеон»</h3>
+                <p class="product-description">Классический слоёный торт с заварным кремом</p>
+                <span class="product-price">1 100 ₽</span>
+                <button class="product-btn">Заказать</button>
+            </div>
+
+            <!-- Эклеры -->
+            <div class="product-card" data-category="macaron">
+                <img src="ecler-Photoroom.png" alt="Эклеры" class="product-image">
+                <h3 class="product-title">Эклеры</h3>
+                <p class="product-description">Заварные пирожные с шоколадным кремом</p>
+                <span class="product-price">600 ₽</span>
+                <button class="product-btn">Заказать</button>
+            </div>
+
+            <!-- Овсяное печенье -->
+            <div class="product-card" data-category="cupcake">
+                <img src="pechenye-Photoroom.png" alt="Печенье овсяное" class="product-image">
+                <h3 class="product-title">Овсяное печенье</h3>
+                <p class="product-description">С хрустящими овсяными хлопьями и изюмом</p>
+                <span class="product-price">300 ₽</span>
+                <button class="product-btn">Заказать</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Блок "О нас" -->
+<div class="about-section">
+    <div class="about-container">
+        <div class="about-text">
+            <h2 class="section-title">Немного о нас</h2>
+            <p>«Perfecto» — это семейная кондитерская, где мы с любовью создаём десерты, которые дарят радость. Мы верим, что настоящий вкус рождается только из натуральных продуктов и вдохновения.</p>
+            <p>Каждое наше изделие — это маленькое произведение искусства, которое мы готовим специально для вас. Попробуйте наши десерты и убедитесь сами!</p>
+        </div>
+        <div class="about-image">
+            <img src="cakeshop.jpg" alt="Наша кондитерская" class="about-img">
+        </div>
+        </div>
+    </div>
+</div>
+
+<!-- Блог / статьи -->
+<div class="blog-section" id="blog">
+    <h2 class="section-title">Полезные статьи</h2>
+    <div class="blog-container">
+        <div class="blog-card">
+            <img src="blog1.jpg" alt="Как выбрать торт" class="blog-img">
+            <h3>Как выбрать идеальный торт?</h3>
+            <p>Советы по начинке, весу и дизайну для любого праздника.</p>
+            <a href="#" class="blog-link">Читать →</a>
+        </div>
+        <div class="blog-card">
+            <img src="blog2.jpg" alt="Секреты макарунов" class="blog-img">
+            <h3>Почему макаруны такие дорогие?</h3>
+            <p>Разбираем мифы и рассказываем о настоящем производстве.</p>
+            <a href="#" class="blog-link">Читать →</a>
+        </div>
+        <div class="blog-card">
+            <img src="blog3.jpg" alt="Капкейки на заказ" class="blog-img">
+            <h3>Капкейки: оформление и вкусы</h3>
+            <p>Тренды 2025 года и самые популярные начинки.</p>
+            <a href="#" class="blog-link">Читать →</a>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Блок отзывов -->
+<div id="reviews" class="reviews-section">
+    <h2 class="section-title">Нас любят клиенты</h2>
+    <div class="reviews-container">
+        <div class="review-card">
+            <img src="avatar1.jpg" alt="Анна" class="review-avatar">
+            <p class="review-text">«Заказывала торт "Нежность" на день рождения дочки. Очень вкусно, красиво и свежо! Спасибо кондитеру. Обязательно закажем ещё»</p>
+            <p class="review-author">— Анна, г. Москва</p>
+            <div class="review-stars">★★★★★</div>
+        </div>
+        <div class="review-card">
+            <img src="avatar2.jpg" alt="Екатерина" class="review-avatar">
+            <p class="review-text">«Макаруны просто божественные! Нежные, тают во рту. Доставка быстрая. Рекомендую всем сладкоежкам»</p>
+            <p class="review-author">— Екатерина, г. Санкт-Петербург</p>
+            <div class="review-stars">★★★★★</div>
+        </div>
+        <div class="review-card">
+            <img src="avatar3.jpg" alt="Михаил" class="review-avatar">
+            <p class="review-text">«Заказывал набор капкейков для корпоратива. Все сотрудники были в восторге! Отличное соотношение цены и качества»</p>
+            <p class="review-author">— Михаил, г. Казань</p>
+            <div class="review-stars">★★★★★</div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Блок контактов -->
+<div id="contacts" class="contacts-section">
+    <h2 class="section-title">Наши контакты</h2>
+    <div class="contacts-container">
+        <div class="contacts-info">
+            <div class="contact-item">
+                <div class="contact-icon">📍</div>
+                <div>
+                    <h3>Адрес</h3>
+                    <p>г. Москва, ул. Кондитерская, д. 15</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">📞</div>
+                <div>
+                    <h3>Телефон</h3>
+                    <p>+7 (495) 123-45-67</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">✉️</div>
+                <div>
+                    <h3>Email</h3>
+                    <p>info@perfecto-candy.ru</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">🕒</div>
+                <div>
+                    <h3>Режим работы</h3>
+                    <p>Ежедневно: 09:00 — 21:00</p>
+                </div>
+            </div>
+        </div>
+        <div class="contact-map">
+            <!-- Яндекс.Карта (пример) -->
+            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A6b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b&amp;source=constructor" width="100%" height="300" frameborder="0"></iframe>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Социальные сети и Telegram -->
+<div class="social-section">
+    <h3>Мы в соцсетях</h3>
+    <div class="social-links">
+        <a href="https://instagram.com/perfecto" target="_blank" class="social-icon instagram">📷 Instagram</a>
+        <a href="https://vk.com/perfecto" target="_blank" class="social-icon vk">📱 VK</a>
+        <a href="https://t.me/perfecto_bot" target="_blank" class="social-icon telegram">✈️ Telegram</a>
+    </div>
+    <div class="telegram-btn-container">
+        <a href="https://t.me/perfecto_support" class="telegram-connect-btn">💬 Связаться с нами в Telegram</a>
+    </div>
+</div>
+
+
+<!-- Форма заявки -->
+<div class="callback-form">
+    <h2 class="section-title">Оставьте заявку</h2>
+    <p class="form-subtitle">Мы перезвоним вам в течение 15 минут и поможем с выбором</p>
+    <form id="callbackForm">
+        <input type="text" id="userName" placeholder="Ваше имя" required>
+        <input type="tel" id="userPhone" placeholder="Телефон" required>
+        <textarea id="userMessage" rows="3" placeholder="Комментарий (необязательно)"></textarea>
+        <button type="submit" class="submit-btn">Отправить заявку</button>
+    </form>
+    <div id="formStatus" class="form-status"></div>
+</div>
+
+    <script>
+        // Данные товаров (теперь для всех 6)
+        const products = {
+            0: { name: "Торт «Нежность»", price: 1200 },
+            1: { name: "Макаруны", price: 800 },
+            2: { name: "Капкейки", price: 500 },
+            3: { name: "Торт «Наполеон»", price: 1100 },
+            4: { name: "Эклеры", price: 600 },
+            5: { name: "Овсяное печенье", price: 300 }
+        };
+
+        let cart = [];
+
+        function loadCart() {
+            const saved = localStorage.getItem('cakeCart');
+            cart = saved ? JSON.parse(saved) : [];
+            updateCartDisplay();
+        }
+
+        function saveCart() {
+            localStorage.setItem('cakeCart', JSON.stringify(cart));
+        }
+
+        function addToCart(productId) {
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({ id: productId, quantity: 1 });
+            }
+            saveCart();
+            updateCartDisplay();
+
+
+            alert(`Товар добавлен в корзину!`);
+        }
+
+        function updateCartDisplay() {
+            const countSpan = document.getElementById('cart-count');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            countSpan.innerText = totalItems;
+            renderCartItems();
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cart-items');
+            if (!container) return;
+            if (cart.length === 0) {
+                container.innerHTML = '<p>Корзина пуста</p>';
+                document.getElementById('cart-total').innerText = '0';
+                return;
+            }
+            let html = '';
+            let total = 0;
+            cart.forEach(item => {
+                const product = products[item.id];
+                const itemTotal = product.price * item.quantity;
+                total += itemTotal;
+                html += `
+                    <div class="cart-item">
+                        <span>${product.name} x ${item.quantity}</span>
+                        <span>${itemTotal} ₽</span>
+                        <button onclick="removeFromCart(${item.id})">Удалить</button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            document.getElementById('cart-total').innerText = total;
+        }
+
+        function removeFromCart(productId) {
+            const index = cart.findIndex(item => item.id === productId);
+            if (index !== -1) {
+                if (cart[index].quantity > 1) {
+                    cart[index].quantity--;
+                } else {
+                    cart.splice(index, 1);
+                }
+                saveCart();
+                updateCartDisplay();
+                renderCartItems();
+            }
+        }
+
+        function clearCart() {
+            cart = [];
+            saveCart();
+            updateCartDisplay();
+            renderCartItems();
+        }
+
+        // Модальное окно
+        const modal = document.getElementById('cart-modal');
+        const cartIcon = document.querySelector('.cart-icon');
+        const closeBtn = document.querySelector('.close');
+
+        cartIcon.onclick = () => {
+            renderCartItems();
+            modal.style.display = 'block';
+        };
+        closeBtn.onclick = () => modal.style.display = 'none';
+        window.onclick = (e) => {
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        document.getElementById('checkout-btn').onclick = () => {
+            if (cart.length === 0) {
+                alert('Корзина пуста');
+                return;
+            }
+            alert('Спасибо за заказ! Мы свяжемся с вами в ближайшее время.');
+            clearCart();
+            modal.style.display = 'none';
+        };
+
+        
+    </script>
+
+
+    <script>
+        // Фильтрация товаров (обёрнуто в DOMContentLoaded)
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const products = document.querySelectorAll('.product-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    const filterValue = btn.getAttribute('data-filter');
+                    
+                    products.forEach(product => {
+                        if (filterValue === 'all' || product.getAttribute('data-category') === filterValue) {
+                            product.style.display = '';  // сброс (возвращает значение из CSS)
+                        } else {
+                            product.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <script>
+    // Обработка формы заявки
+const form = document.getElementById('callbackForm');
+if (form) {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('userName').value;
+        const phone = document.getElementById('userPhone').value;
+        const message = document.getElementById('userMessage').value || 'без комментария';
+        
+        // Здесь можно было бы отправить данные на сервер, но для демо просто покажем уведомление
+        document.getElementById('formStatus').innerHTML = `<span style="color: green;">Спасибо, ${name}! Мы скоро свяжемся с вами по номеру ${phone}</span>`;
+        form.reset();
+        
+        // Через 3 секунды очищаем статус
+        setTimeout(() => {
+            document.getElementById('formStatus').innerHTML = '';
+        }, 5000);
+    });
+}
+    </script>
+
+<script>
+    // === ОБРАБОТЧИКИ ДЛЯ КНОПОК "ЗАКАЗАТЬ" ===
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.product-card');
+        cards.forEach((card, index) => {
+            const btn = card.querySelector('.product-btn');
+            if (btn) {
+                // Удаляем возможные старые обработчики (если были)
+                const newBtn = btn.cloneNode(true);
+                btn.parentNode.replaceChild(newBtn, btn);
+                newBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    addToCart(index);  // index совпадает с id товара в объекте products
+                });
+            }
+        });
+        console.log('Обработчики кнопок добавлены, всего карточек:', cards.length);
+    });
+</script>
+
+<script>
+    // 1. Таймер акции (до окончания через 3 дня)
+    function startTimer() {
+        const endTime = new Date();
+        endTime.setDate(endTime.getDate() + 3); // акция идёт 3 дня
+        endTime.setHours(23, 59, 59, 999);
+        function update() {
+            const now = new Date();
+            const diff = endTime - now;
+            if (diff <= 0) {
+                document.getElementById('timer').innerText = "Акция завершена!";
+                return;
+            }
+            const days = Math.floor(diff / (1000*60*60*24));
+            const hours = Math.floor((diff / (1000*60*60)) % 24);
+            const mins = Math.floor((diff / (1000*60)) % 60);
+            const secs = Math.floor((diff / 1000) % 60);
+            document.getElementById('timer').innerText = `${days}д ${hours}ч ${mins}м ${secs}с`;
+        }
+        update();
+        setInterval(update, 1000);
+    }
+    startTimer();
+
+    // 2. Конструктор торта: расчёт цены
+    function updateConstructorPrice() {
+        const crust = parseInt(document.getElementById('crust').value);
+        const filling = parseInt(document.getElementById('filling').value);
+        const sizeMult = parseFloat(document.getElementById('size').value);
+        const decor = parseInt(document.getElementById('decor').value);
+        // базовая цена за кг 1000, умножаем на размер
+        let base = 1000 * sizeMult;
+        let total = base + crust + filling + decor;
+        document.getElementById('constructor-total').innerText = total;
+    }
+    document.getElementById('crust').addEventListener('change', updateConstructorPrice);
+    document.getElementById('filling').addEventListener('change', updateConstructorPrice);
+    document.getElementById('size').addEventListener('change', updateConstructorPrice);
+    document.getElementById('decor').addEventListener('change', updateConstructorPrice);
+    updateConstructorPrice();
+
+    // Добавление конструктора в корзину (расширяем массив товаров)
+    document.getElementById('add-constructor-to-cart').addEventListener('click', () => {
+        const crustSel = document.getElementById('crust').selectedOptions[0].text;
+        const fillingSel = document.getElementById('filling').selectedOptions[0].text;
+        const sizeVal = document.getElementById('size').value;
+        const decorSel = document.getElementById('decor').selectedOptions[0].text;
+        const total = document.getElementById('constructor-total').innerText;
+        const productId = `custom_${Date.now()}`;
+        // Добавляем кастомный товар в корзину (расширяем объект products динамически)
+        window.customProducts = window.customProducts || {};
+        window.customProducts[productId] = { name: `Торт на заказ (${crustSel}, ${fillingSel}, ${sizeVal}кг, ${decorSel})`, price: parseInt(total) };
+        // Функция addToCart из основного кода ожидает id и массив products. Но она работает только с числовыми id. Переопределим для конструктора.
+        // Проще добавить в корзину через существующую логику, но нужно расширить addToCart
+        // Создадим временную функцию push
+        if (typeof addToCart === 'function') {
+            // Но addToCart ожидает число. Вместо этого вызовем внутренние функции корзины
+            // Обойдём систему: напрямую работать с localStorage
+            let cart = JSON.parse(localStorage.getItem('cakeCart') || '[]');
+            cart.push({ id: productId, quantity: 1 });
+            localStorage.setItem('cakeCart', JSON.stringify(cart));
+            // Обновить интерфейс
+            if (typeof updateCartDisplay === 'function') updateCartDisplay();
+            else location.reload();
+            alert(`Добавлен торт на заказ на сумму ${total} ₽`);
+        } else {
+            alert('Корзина не инициализирована, но товар сохранён в консоли');
+            console.log('Торт конструктора:', { productId, name: window.customProducts[productId].name, price: total });
+        }
+    });
+
+    // 3. Плавная прокрутка к якорям
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1); // убираем #
+            const target = document.getElementById(targetId);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                // если нет элемента с таким id, ищем по классу или просто ничего не делаем
+                console.warn('Элемент не найден:', targetId);
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
