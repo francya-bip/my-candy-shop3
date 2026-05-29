@@ -672,3 +672,127 @@ p {
     margin-top: 15px;
 }
 
+
+/* ========== АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ ========== */
+@media (max-width: 992px) {
+    .products-container {
+        gap: 20px;
+        padding: 0 15px;
+    }
+    .product-card {
+        width: calc(50% - 15px);
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+    h1 {
+        font-size: 1.8rem;
+        padding-top: 15px;
+    }
+    .subtitle {
+        font-size: 1rem;
+        margin-top: -20px;
+        margin-bottom: 30px;
+    }
+    .products-container {
+        gap: 15px;
+        margin: 30px auto;
+    }
+    .product-card {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+        padding: 15px;
+    }
+    .product-image {
+        height: 180px;
+    }
+    .product-title {
+        font-size: 1.2rem;
+    }
+    .product-price {
+        font-size: 1.2rem;
+    }
+    .product-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    /* Корзина */
+    .cart-icon {
+        top: 10px;
+        right: 10px;
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+    .cart-modal-content {
+        width: 95%;
+        margin: 20% auto;
+        padding: 15px;
+    }
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    /* Фильтр */
+    .filter-buttons {
+        gap: 8px;
+        margin: 20px 0;
+    }
+    .filter-btn {
+        padding: 6px 14px;
+        font-size: 0.8rem;
+    }
+    /* Отзывы */
+    .reviews-container {
+        gap: 20px;
+    }
+    .review-card {
+        width: 100%;
+        max-width: 300px;
+    }
+    /* Форма */
+    .callback-form {
+        margin: 30px 15px;
+        padding: 20px;
+    }
+    /* Навигация (если есть) */
+    .main-nav .nav-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    .product-card {
+        padding: 12px;
+    }
+    .product-image {
+        height: 150px;
+    }
+    .product-title {
+        font-size: 1rem;
+    }
+    .product-price {
+        font-size: 1rem;
+    }
+    .product-btn {
+        font-size: 0.8rem;
+    }
+    .cart-icon {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+}
+
